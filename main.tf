@@ -222,7 +222,7 @@ resource "aws_sagemaker_domain" "studio" {
     # KernelGateway settings - using SageMaker Distribution image
     kernel_gateway_app_settings {
       default_resource_spec {
-        instance_type        = "ml.t3.medium"
+        instance_type        = var.kernel_gateway_instance_type
         sagemaker_image_arn  = local.sagemaker_distribution_image_arn
         lifecycle_config_arn = aws_sagemaker_studio_lifecycle_config.auto_shutdown.arn
       }

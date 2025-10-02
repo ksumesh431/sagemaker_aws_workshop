@@ -36,3 +36,9 @@ variable "idle_timeout_in_minutes" {
   type        = number
   default     = 30
 }
+
+variable "kernel_gateway_instance_type" {
+  description = "Instance type for the Kernel Gateway"
+  type        = string
+  default     = "ml.t3.medium"
+}
