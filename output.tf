@@ -1,5 +1,3 @@
-
-# Outputs
 output "sagemaker_domain_id" {
   description = "SageMaker Studio Domain ID"
   value       = aws_sagemaker_domain.studio.id
@@ -40,17 +38,6 @@ output "kernel_gateway_image" {
   value       = local.sagemaker_distribution_image_arn
 }
 
-output "studio_access_instructions" {
-  description = "Instructions to access SageMaker Studio"
-  value       = <<-EOT
-    1. Go to AWS Console > SageMaker > Domains > ${var.domain_name}
-    2. Select User profiles > ${var.user_profile_name}
-    3. Click 'Launch' > 'Studio'
-    4. Auto-shutdown is configured for ${var.idle_timeout_in_minutes} minutes of inactivity
-    5. You can manually stop apps from the Studio UI or AWS Console to save costs
-  EOT
-}
-
 output "cost_saving_tips" {
   description = "Cost saving tips"
   value       = <<-EOT
@@ -60,5 +47,14 @@ output "cost_saving_tips" {
     - You can manually stop apps: SageMaker Console > Domains > Apps > Delete
     - Or via CLI: aws sagemaker delete-app --domain-id ${aws_sagemaker_domain.studio.id} --user-profile-name ${var.user_profile_name} --app-type KernelGateway --app-name <app-name>
     - You only pay for running compute (ml.t3.medium = ~$0.05/hour)
+  EOT
+}
+
+output "destroy_warning" {
+  description = "Important: Before running 'terraform destroy', manually delete the SageMaker Spaces in the AWS Console to avoid errors"
+  value       = <<-EOT
+    ⚠️ Important: Before running 'terraform destroy', manually delete the SageMaker Spaces in the AWS Console:
+    - Go to AWS Console > SageMaker > Domains > Apps > Delete
+    - Failure to do so will result in errors when running 'terraform destroy'
   EOT
 }

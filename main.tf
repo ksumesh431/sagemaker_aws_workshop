@@ -247,7 +247,6 @@ resource "aws_sagemaker_domain" "studio" {
 resource "aws_sagemaker_user_profile" "workshop_user" {
   domain_id         = aws_sagemaker_domain.studio.id
   user_profile_name = var.user_profile_name
-
   user_settings {
     execution_role = aws_iam_role.sagemaker_execution_role.arn
 
