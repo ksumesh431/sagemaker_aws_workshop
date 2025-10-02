@@ -50,6 +50,13 @@ resource "aws_iam_role_policy_attachment" "s3_full_access" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
 
+# Attach Bedrock full access (broad, great for workshops)
+resource "aws_iam_role_policy_attachment" "bedrock_full_access" {
+  role       = aws_iam_role.sagemaker_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonBedrockFullAccess"
+}
+
+
 # Additional inline policy for SageMaker Studio
 resource "aws_iam_role_policy" "sagemaker_studio_policy" {
   name = "SageMakerStudioAdditionalPolicy"
